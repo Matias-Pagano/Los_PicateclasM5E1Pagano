@@ -1,0 +1,599 @@
+* {
+    box-sizing: border-box;
+    font-family: roboto;
+    margin: 0px;
+    padding: 0px;
+  }
+
+html{
+    background-color: #ebebeb;
+}
+
+body {
+    margin-top: 158px;
+}
+
+header{
+    background-color: #EAC926;
+    width: 100%;
+    padding: 8px;
+    padding-right: 15px;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+}
+
+.logoML{
+    width: 50%;
+    padding: 15px;
+}
+
+.nav-bar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copy-header{
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+
+main{
+    background-color: #ebebeb;
+    background-size: cover;
+    margin: 0 auto;
+    width: 90%;
+}
+main section article {
+    margin: 10px 0;
+}
+
+main section article img{
+    width: 100%;
+}
+
+main section article article i {
+    display: block;
+    font-size: 16px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    color: #39b54a;
+    border: 1px solid #39b54a;
+    background-color: #FFF;
+    border-radius: 50%;
+    position: absolute;
+    right: 20px;
+    top: -15px;
+}
+
+article#separacion {
+    background-color: white;
+    }
+
+.caja{
+    border-top: solid 1px #ebebeb;
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+}
+
+footer{
+    background-color: white;
+    background-size: 100%;
+    text-align: center;
+    color:#666;
+    box-sizing: border-box;
+    padding: 4%;
+    padding-top: 70px;
+    width: 100vw;
+    margin: auto;
+}
+
+.titulares{
+    font-size: 24px;
+    color: #666;
+    background-color: #ebebeb;
+    padding: 2%;
+}
+
+.precios{
+    font-size: 18px;
+}
+
+.descuentos{
+    font-size: 16px;
+    color: #666;
+}
+
+.descripciones{
+    font-size: 16px;
+    color: #666;
+    
+}
+
+article#separacion .descripciones {
+    opacity: 0;
+    transition: all 500ms;
+}
+
+article#separacion:hover .descripciones {
+    opacity: 1;
+}
+
+article#separacion i {
+    transition: transform 1s;
+}
+
+article#separacion:hover i{
+    transform: rotate(-90deg);
+}
+
+.caja p.descuentos{
+    color: #39b54a;
+    flex: 1 1 70%;
+}
+
+.caja p.precios {
+    flex: 1 1 30%;
+}
+
+.descripciones {
+    display: none;
+}
+
+p{
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.caja div.precioDescuento {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.caja div p {
+    margin-right: 1rem;
+}
+
+nav ul{
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.barraDeNav{
+    display: none;
+}
+
+.burger-menu{
+    color: white;
+    background-color:#0044AA;
+    display: block;
+    max-width: 50px;
+    padding: 10px 0;
+    border-radius: 6px;
+    text-align: center;
+    margin: auto;
+    font-size: 18px;
+}
+
+h3.titulares{
+    width: 100%;
+    margin: auto;
+    text-align: left;
+}
+
+a{
+    text-decoration: none;
+    color: #03264C; 
+}
+
+#icon{
+    color: #1259c3;;
+    align-items: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+p#textoCentrado i{
+    text-align: center;
+    margin: 10px;
+}
+
+article#noMargen p{
+    margin-top: 0;
+    margin-bottom: 4em;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+footer#noEspacio h3{
+    margin: 0;
+}
+
+footer article#noMargen i:hover {
+    color: #0022AA;
+}
+
+h5{
+    font-size: 12px;
+    text-align: left;
+}
+
+form.buscador{
+    width: 50%;
+    padding: 2px;
+}
+
+form.buscador input[type=text] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid white;
+    float: left;
+    width: 70%;
+    background: white;
+    border-radius: 7px 0px 0px 7px
+}
+
+form.buscador button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: white;
+    font-size: 16px;
+    border: 1px solid white;
+    cursor: pointer;
+    border-radius: 0px 7px 7px 0px
+  }
+
+form.buscador button:hover {
+    background: #0b7dda;
+  }
+
+  form.buscador::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+/*---Register---*/
+
+section.section-register {
+    display: flex;  
+    /*border: red 1px solid;*/
+}
+
+.contenedor1 {
+    display: flex;
+    width: 90vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+input#nombre {
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    padding: 5px;
+}
+
+input#usuario {
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    padding: 5px;
+}
+
+input#e-mail {
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    padding: 5px;
+}
+
+.contenedor1 label {
+    margin: 1rem;
+}
+
+.contenedor2 {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+input#calendario {
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    padding: 5px;
+    background-color: white;
+}
+
+input#domicilio {
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    padding: 5px;
+}
+
+.contenedor3 {
+    width: 90vw;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.contenedor3 input {
+    margin-right: 15px;
+}
+
+.contenedor4 {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.contenedor4 div {
+    margin-top: 0.5rem;
+}
+
+input#check {
+    margin: 10px;
+}
+
+.contenedor5 {
+    width: 90vw;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: 1.5rem;
+}
+
+.contenedor6 {
+    width: 90vw;
+    display: flex;
+    margin: 10px 0 10px 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+input#password {
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    padding: 5px;
+}
+
+.elegirContraseña {
+    margin-bottom: 1.5rem;
+}
+
+.contenedor7 {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.contenedor7 button {
+    width: 100%;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #0044AA;
+    padding: 8px;
+    margin-top: 30px;
+    background-color: #0044AA;
+}
+
+.contenedor7 button:hover {
+    background-color: #0022AA;
+}
+
+.contenedor8 {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.contenedor8 button {
+    width: 100%;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #a11717;
+    padding: 8px;
+    margin-top: 20px;
+    background-color: #a11717;
+}
+
+.botones {
+    margin-bottom: 1.5rem;
+}
+
+/*---Login---*/
+
+input#nombreUsuario {
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    padding: 5px;
+    background-color: white;
+}
+
+@media(min-width: 361px){
+    article#separacion:hover{
+        box-shadow : 0px 0px 10px rgb(100, 100, 100 );
+    }
+
+    .descripciones{
+        display: block;
+    }
+    body {
+        margin-top: 144px;
+    }
+    .barraDeNav{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .barraDeNav ul{
+        display: flex;
+    }
+    .barraDeNav li{
+        margin: 5px;
+    }
+    .logoML{
+        width: 35%;
+    }
+    .burger-menu{
+    display: none;
+    }
+    .copy-header{
+        font-size: 12px;
+        font-weight: normal;
+        text-align: left;
+        margin: 0px;
+    }
+    section.nav-bar{
+        flex-wrap: nowrap;
+    }
+    section.productos{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    #separacion{
+        width: 45%;
+    }
+    form.buscador{
+        width: 60%;
+    }
+}  
+
+
+@media(min-width: 769px){
+    article#separacion:hover{
+        box-shadow : 0px 0px 10px rgb(100, 100, 100 );
+    }
+    .descripciones{
+        display: block;
+    }
+    body {
+        margin-top: 101px;
+    }
+    .barraDeNav{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .barraDeNav ul{
+        display: flex;
+    }
+
+    .barraDeNav li{
+        margin: 5px;
+    }
+
+    .logoML{
+        width: 20%;
+        max-width: 231px;
+    }
+
+    .burger-menu{
+        display: none;
+    }
+    .copy-header{
+        font-size: 12px;
+        font-weight: normal;
+        text-align: left;
+        margin: 0px;
+    }
+    section.nav-bar{
+        flex-wrap: nowrap;
+    }
+    section.productos{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    #separacion{
+        width: 22%;
+    }
+    div.footerFlex{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    form.buscador{
+        width: 70%;
+    }
+}
+
+
+/*-----Register-----*/
+
+.main-register {
+    margin: auto;
+}
+
+input#nombre, input#usuario, input#e-mail, input#calendario, input#domicilio, input#password, input#nombreUsuario {
+    max-width: 700px;
+}
+
+.main-register button{
+    max-width: 700px;
+}
+
+div.contenedor3, div.contenedor4, div.contenedor6 {
+    max-width: 700px;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;  
+}
+
+.main-register h3 {
+    max-width: 700px;
+    margin: auto;
+}
+
+/*-----Login------*/
+
+div.contenedor7 button {
+    max-width: 700px;
+}
