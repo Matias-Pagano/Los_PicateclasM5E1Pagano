@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 //llamo al ruteo
 app.use('/', homeRouter);
 //app.use('/', userRouter);
-//app.use('/products', productRouter);
+app.use('/products', productRouter);
 
 /*app.get('/', (req, res) => {
     res.render('home');

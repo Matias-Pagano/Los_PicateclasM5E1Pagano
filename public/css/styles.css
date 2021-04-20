@@ -159,6 +159,7 @@ p{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 .caja div p {
@@ -462,6 +463,11 @@ input#nombreUsuario {
     .descripciones{
         display: block;
     }
+    h4.descripciones {
+        margin-top: 10px;
+        text-align: start;
+        width: 100%;
+    }
     body {
         margin-top: 144px;
     }
@@ -470,6 +476,8 @@ input#nombreUsuario {
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
+        margin-left: 15px;
+        margin-right: 15px;
     }
     .barraDeNav ul{
         display: flex;
