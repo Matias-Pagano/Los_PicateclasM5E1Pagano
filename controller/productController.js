@@ -1,10 +1,10 @@
 let visitados = require('../data/datosProductos');
 
-let controladorProducto = {
+let productController = {
     leerTodos: function(){
         console.log('leo productos desde data')
         return visitados
     }
 }
 
-module.exports = controladorProducto
+module.exports = productController

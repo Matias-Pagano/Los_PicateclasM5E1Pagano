@@ -5,6 +5,12 @@ const productController = require('../controller/productController');
 
 
 router.get('/', (req, res) => {
+    const products = productController.leerTodos();
+    res.send("Listado de productos")
+})
+
+router.get('/products', (req, res) => {
+    const products = productController.leerTodos();
     res.send("Listado de productos")
 })
 
@@ -13,7 +19,7 @@ router.get('/create', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    res.send("Detalle de producto "+ req.params.id)
+    res.send("Detalle de producto " + req.params.id)
 })
 
 router.post('/', (req, res) => {
