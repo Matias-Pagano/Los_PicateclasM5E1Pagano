@@ -2721,5 +2721,11 @@
     ],
     "price": 3630,
     "stock": 43
+  },
+  {
+    "id": 101,
+    "name": "nuevo producto modificado",
+    "brand": "Adidas",
+    "price": 100
   }
 ]

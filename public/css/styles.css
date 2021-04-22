@@ -571,6 +571,9 @@ input#nombreUsuario {
     form.buscador{
         width: 70%;
     }
+    main.create, .edit, .not-found, .productDetail, .products {
+        margin-top: 123px;
+    }
 }
 
 
