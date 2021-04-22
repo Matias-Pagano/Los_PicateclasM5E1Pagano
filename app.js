@@ -3,10 +3,10 @@ const app = express()
 const port = process.env.PORT;
 const path = require('path');
 //donde estan los gerentes de ruteo
-const homeRouter = require('./routes/homeRouter');
-const userRouter = require('./routes/userRouter');
-const loginRouter = require('./routes/userRouter');
-const productRouter = require('./routes/productRouter');
+const homeRoutes = require('./routes/homeRoutes');
+const userRoutes = require('./routes/userRoutes');
+const loginRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes');
 
 const methodOverride = require('method-override');   
 const { render } = require('ejs');
@@ -19,17 +19,17 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 
 //llamo al ruteo
-app.use('/', homeRouter);
+app.use('/', homeRoutes);
 
-app.use('/products', productRouter);
+app.use('/products', productRoutes);
 
-app.use('/', userRouter); 
+app.use('/', userRoutes); 
 
-app.use('/', loginRouter); 
+app.use('/', loginRoutes); 
 
-app.use((req, res, next) => {
-    res.status(404).render('not-found');
-})
+// app.use((req, res, next) => {
+//     res.status(404).render('not-found');
+// })
 
 /*app.get('/', (req, res) => {
     res.render('home');
