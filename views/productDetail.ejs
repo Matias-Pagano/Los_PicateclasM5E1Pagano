@@ -4,21 +4,31 @@
 <body>
     <%- include('partials/header') %>
 
-    <main class="create">
-        <h1>Producto <%= product.id %></h1>
-        <div>
-            <h4>Nombre:</h4>
-            <p><%=product.name%></p>
-            <br>
-            <h4>Descripción: </h4>
-            <p><%= product.description %></p>
-            <form action="/products/<%= product.id %>?_method=DELETE" method="post">
-                <input type="submit" value="Eliminar">
-            </form>
-            <form action="/products/edit/<%= product.id %>" method="get">
-                <input type="submit" value="Editar">
-            </form>
-        </div>
+    <main>
+        <h3>Detalle de Producto</h3>
+        <section class="ultima-visita">
+            <div class="articulo">
+                <h1>
+                    <%= product.name %>
+                </h1>
+                <h2>$ <%= product.price %>
+                </h2>
+                <p>
+                    <%= product.descuento %>
+                </p>
+                <figure class="image">
+                    <img src="/images/<%= product.image %>" alt="" class="product_img">
+                </figure>
+              
+                <a href="/products/<%= product.id %>/edit" class="button is-success">Editar</a>
+
+                <form class="form is-inline" action="/products/<%= product.id %>?_method=DELETE" method="POST">
+                    <button type="submit" class="button is-danger">Borrar</button>
+                </form>
+            </div>
+
+        </section>
+
     </main>
 </body>
 </html>

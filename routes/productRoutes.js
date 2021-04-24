@@ -1,57 +1,30 @@
 const express = require('express');
 const router = express.Router();
-
-const productsController = require('../controller/productController');
-
-router.get('/', productsController.list);
-router.get('/search', productsController.search);
-
-router.get('/create', productsController.create);
-router.post('/', productsController.store);
-
-router.get('/edit/:id', productsController.edit);
-router.put('/', productsController.update);
-
-router.get('/:id', productsController.detail);
-router.delete('/:id', productsController.destroy);
+const controller = require('../controller/productController');
 
 
-// router.get('/', (req, res) => {
-//     const products = productController.leerTodos();
-//     res.send("Listado de productos")
-// })
+// Formulario de creación de productos (GET)
+router.get('/cart', controller.cart);
 
-// router.get('/products', (req, res) => {
-//     const products = productController.leerTodos();
-//     res.send("Listado de productos")
-// })
+// Formulario de creación de productos (GET)
+router.get('/create', controller.create);
 
-// router.get('/create', (req, res) => {
-//     res.send("Crear un producto")
-// })
+// Detalle de un producto particular (GET)
+router.get('/:id', controller.show);
 
-// router.get('/:id', (req, res) => {
-//     res.send("Detalle de producto "+ req.params.id)
-// })
+// El get de la Barra de Búsqueda
+router.get('/search', controller.search)
 
-// router.post('/', (req, res) => {
-//     res.send("Recibe datos de formulario")
-//     //res.send(req.body)
-// })
+// Formulario de edición de productos (GET)
+router.get('/:id/edit', controller.edit);
 
+// Acción de creación (a donde se envía el formulario) (POST)
+router.post('/store', controller.store);
 
-// router.get('/edits/:id', (req, res) => {
-//     res.send("Muestra el formulario para editar el producto")
-// })
+// Acción de edición (a donde se envía el formulario) (PUT)
+router.put('/:id', controller.update);
 
-// router.put('/', (req, res) => {
-//     res.send("Modificar producto")
-// })
-
-
-// router.delete('/:id', (req, res) => {
-//     res.send("Borra producto")
-// })
-
+// Acción de borrado (DELETE)
+router.delete('/:id', controller.destroy);
 
 module.exports = router;

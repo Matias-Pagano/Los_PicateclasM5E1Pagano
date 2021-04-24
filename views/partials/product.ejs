@@ -1,17 +1,19 @@
 <article id="separacion">
-    <img src="/images/<%= product.image %>" width="100%" alt="Cafetera" class="product_img">
-    <article class="caja"> 
-        <i class="fas fa-truck"></i>
-        <div class="precioDescuento">
-            <p class="precios">
-                <%= product.price %>
-            </p>
-            <p class="descuentos">
-                <%= product.descuento %> % off
-            </p>
-        </div>
-        <h4 class="descripciones">
-            <%= product.name %>
-        </h4>
-    </article>
+    <a href="/products/<%= product.id %>">
+        <img src="/images/<%= product.image %>" width="100%" alt="<%= product.name %>" class="product_img">
+        <article class="caja">
+            <i class="fas fa-truck"></i>
+            <div class="precioDescuento">
+                <p class="precios">
+                    $ <%= product.price %>
+                </p>
+                <p class="descuentos">
+                    <%= product.descuento %> % off
+                </p>
+            </div>
+            <h4 class="descripciones">
+                <%= product.name %>
+            </h4>
+        </article>
+    </a>
 </article>

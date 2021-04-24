@@ -1,5 +1,5 @@
 const controlador = {
-    index: (req, res) => {
+    register: (req, res) => {
         res.render('register')
     },
     login: (req, res) => {

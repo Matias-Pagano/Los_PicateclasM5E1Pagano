@@ -1,81 +1,154 @@
-const productModel = require('../models/productsModel');
+let visitados = require('../data/datosProductos')
 
 
-const controlador = {
-    list: (req, res) => {
-        const products = productModel.getProductList();     // Solicitamos al modelo el listado de productos.
-        return res.render('home', { products })
-    },
-    search: (req, res) => {
-        const query = req.query;                                        // Capturamos el query
-        const querySearch = query.search.toLowerCase();                 // separamos la propiedad name del query
-        const products = productModel.getProductList();                 // traemos del modelo los productos
-        const filteredProducts = products.filter( product => {          // filtramos los que coincidan con la busqueda en una nueva constante filteredProducts
-            const productName = product.name.toLowerCase();             // cada name lo convertimos a minuscula, lo guardamos aparte para no pisar el nombre real
-            return productName.indexOf(querySearch) !== -1;             // retornamos evaluación de buscar en productName el string de busqueda, si es true la comparación
-        });                                                             // se retorna true y por no se filtra ese elemento.
-        return res.render('product', { products: filteredProducts });  // Compartimos con la vista de products, pero con la lista filtrada. 
-    },
-    list: (req, res) => {
-        const products = productModel.getProductList();
-        return res.render('products', { products })
-    },
-    detail: (req, res) => {
-        const id = req.params.id;
-        const product = productModel.getProductDetail(id);  // Le pedimos al modelo el detalle de un producto, le pasamos el ID para buscarlo. 
-        return res.render( 'productDetail', { product })
-    },
-    destroy: (req, res) => {
-        const id = Number(req.params.id);                                           // Capturamos el ID que se quiere eliminar desde req.params.id, lo convertimos a Number y lo guardamos en id
-        const products = productModel.readProducts();                             // Traemos todos los productos
-        const newArrayProducts = products.filter( product => product.id !== id);    // filtramos el que sea el mismo ID, lo que es lo mismo que crear un nuevo array con todos menos el id a eliminar
-        const isDeleted = productModel.writeProducts(newArrayProducts);          // Escribimos nuevamente el archivo. Le pedimos a (modelo) que escriba el archivo.
+let productController = {
 
-        
-        if ( isDeleted ) return res.redirect('/products/');                         // Si se borró, redirijo a listado (/products/)
-        return res.send('Error inesperado al eliminar el producto');                // Si no se borró, muestro error inesperado
+    home: (req, res) => {
+        console.log('entro al home del produt controller y redirijo')
+
+        res.redirect('/')
+
     },
-    create: (req, res) => {
-        return res.render('create');
-    },
-    store: (req, res) => {
-        const body = req.body;
-        let products = productModel.readProducts();
-        const maxIdProduct = products.reduce( (curr, next) => curr.id >= next.id ? curr : next );
-        const newProduct = {
-            id: maxIdProduct.id + 1,
-            name: body.name,
-            brand: body.brand,
-            price: Number(body.price)
-            // Completar resto de propiedades para que todos los productos queden iguales. 
+
+// Función que muestra el detalle del producto, cuando hacemos click en la foto
+    show: (req, res) => {
+        console.log('me hicieron click :' + req.params.id)
+
+        //        let product = visitados.find((value)=>value.id===req.params.id)
+
+        let product = visitados.find(function (value) {
+            console.log('me encontraron:' + value.id)
+            return value.id === req.params.id
+        })
+
+        console.log(product)
+        if (product) {
+            res.render('productDetail', { product });
+        } else {
+            res.render('not-found');
         }
-        products.push(newProduct);
-        const isCreated = productModel.writeProducts(products);
-
-        if ( isCreated ) return res.redirect('/products/');                         // Si se cre'o, redirijo a listado (/products/)
-        return res.send('Error inesperado al eliminar el producto');                // Si no se borró, muestro error inesperado
     },
+
+// Función que muestra el formulario de crear Productos
+    create: (req, res) => {
+        console.log('entre a crear')
+        res.render('create');
+    },
+// Función que simula el almacenamiento, en este caso en array
+    store: (req, res) => {
+        console.log('entre al store')
+        console.log(req.body)
+        let producto =
+        {
+            id: "11",
+            name: req.body.name,
+            descuento: req.body.descuento,
+            price: req.body.price,
+            image: "images/img-cafetera-moulinex.jpg"
+
+        }
+ //------MUESTRO EL PRODUCTO A AGREGAR EN EL ARRAY       
+// Se agrega el registro al array
+        visitados.push(producto)
+      
+        res.redirect('/')
+    },
+
+// FUnción que muestra el formulario de edición
     edit: (req, res) => {
-        const id = Number(req.params.id);
-        const product = productModel.getProductDetail(id);
-        return res.render('edit', { product });
-    },
-    update: (req, res) => {
-        const body = req.body;
-        const id = Number(body.id);
-        let products = productModel.readProducts();
-        products.forEach(product => {
-            if ( product.id === id ){
-                product.name = body.name;
-                product.brand = body.brand;
-                product.price = Number(product.price);
-                // Completar resto de propiedades para que todos los productos queden iguales. 
-            }
-        });
-        const isEdited = productModel.writeProducts(products);
-        if ( isEdited ) return res.redirect('/products/'+ id);                         // Si se cre'o, redirijo a listado (/products/:id)
-        return res.send('Error inesperado al eliminar el producto');                // Si no se borró, muestro error inesperado
-    }
-};
+        console.log('ESTOY ENTRANDO AL METODO EDIT:')
 
-module.exports = controlador
+        let product = visitados.find(function (value) {
+
+            return value.id === req.params.id
+        })
+
+        console.log(product)
+        if (product) {
+            res.render('edit', { product });
+        } else {
+            res.render('not-found');
+        }
+    },
+
+// Función que realiza cambios en el producto seleccionado
+    update: (req, res) => {
+        console.log('Entré al Update')
+        console.log(req.body)
+
+        // Crep una estructura de datos de similares campos que producto del Array Visitados
+        // Para asignarle el valor o contenido de los camos que viajarn por el body
+        let producto = {
+
+           
+            id: req.params.id,
+            name: req.body.name,
+            descuento: req.body.descuento,
+            price: req.body.price,
+            image: req.body.image
+
+        }
+        console.log(producto)
+        console.log('---------------------------------------')
+        console.log('me seleccionaron en update :' + req.params.id)
+
+        // En este momento en la variable litaral tengo todos los campos
+        // actualizados, entonces recorro rodo el array orifinal
+        // Localizo el id que quiero mofificar y procedo a:
+        // REEMPLAZAR EL VALOR DE CADA PROPIEDAD-
+        // NOTA EL ID DEL ARRAY NO SE MODIFICA
+
+
+        visitados.forEach(function (i) {
+            if (i.id === req.params.id) {
+                i.name = producto.name
+                i.price = producto.price
+                i.descuento = producto.descuento
+            }
+
+        })
+        console.log(visitados)
+
+// Me voy a la página principal mostrando todos los productos
+// y la modificación en el producto en cuestión
+        res.redirect('/')
+    },
+
+// Función que elimina del Array visitados ek producto seleccionado
+    destroy: (req, res) => {
+        console.log('entre destroy')
+        console.log(req.params.id)
+
+
+// Recorremos el array visitados y generamos otro, excluyendo el registro
+// que deseamos elinimar
+        let menorArray = visitados.filter(function (value) {
+
+            return value.id !== req.params.id
+        })
+        console.log('-------ARRAY NUEVO MENOR')
+        console.log(menorArray)
+//  Se copia el array que tiene todos menos el eliminado en el array visitados     
+        visitados = [...menorArray]
+        console.log('----------ARRAY VISITADOS')
+// Se observa que el eliminado no pertenece al array     
+        console.log(visitados)
+ // Ahora se mostrará todo porque los productos los varga de un archivo       
+        res.redirect('/')
+    },
+
+
+    cart: (req, res) => {
+        res.render('products/cart');
+    },
+
+    search: (req, res) => {
+
+        let dataABuscar = req.query
+        res.sed(dataABuscar)
+    }
+
+}
+
+
+module.exports = productController
