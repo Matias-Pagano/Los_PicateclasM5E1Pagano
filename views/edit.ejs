@@ -7,7 +7,7 @@
 
         <%- include('partials/header') %>
 
-            <main>
+            <main class="mainEdit">
                 <h3>Edición de Producto</h3>
                 <section class="ultima-visita">
 
@@ -15,7 +15,7 @@
 
                         <div class="field">
                             <label for="name">Nombre</label>
-                            <div class="control">
+                            <div class="control1">
 
                                 <input type="text" name="name" value="<%= product.name %>">
                             </div>
@@ -32,14 +32,14 @@
 
                         <div class="field">
                             <label for="price">Precio</label>
-                            <div class="control">
+                            <div class="control2">
                                 <input type="text" name="price" value="<%= product.price %>">
                             </div>
                         </div>
 
                         <div class="field">
                             <label for="descuento">descuento</label>
-                            <div class="control">
+                            <div class="control3">
 
                                 <input type="text" name="descuento" value="<%= product.descuento  %>">
                             </div>

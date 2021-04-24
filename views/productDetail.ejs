@@ -4,21 +4,23 @@
 <body>
     <%- include('partials/header') %>
 
-    <main>
+    <main class="mainProductDetail">
         <h3>Detalle de Producto</h3>
         <section class="ultima-visita">
+            <figure class="image">
+                <img src="/images/<%= product.image %>" alt="" class="product_img">
+            </figure>
             <div class="articulo">
-                <h1>
+                <div class="nombres">
+                <h3>
                     <%= product.name %>
-                </h1>
-                <h2>$ <%= product.price %>
-                </h2>
+                </h3>
+                <h3>$ <%= product.price %>
+                </h3>
                 <p>
-                    <%= product.descuento %>
+                   % <%= product.descuento %>
                 </p>
-                <figure class="image">
-                    <img src="/images/<%= product.image %>" alt="" class="product_img">
-                </figure>
+            </div>
               
                 <a href="/products/<%= product.id %>/edit" class="button is-success">Editar</a>
 
@@ -30,5 +32,8 @@
         </section>
 
     </main>
+
+    <%- include('partials/footer') %>
+
 </body>
 </html>

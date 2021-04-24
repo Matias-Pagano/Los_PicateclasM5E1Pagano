@@ -10,7 +10,7 @@ html{
 }
 
 body {
-    margin-top: 158px;
+    margin-top: 160px;
 }
 
 header{
@@ -139,11 +139,11 @@ article#separacion:hover i{
 
 .caja p.descuentos{
     color: #39b54a;
-    flex: 1 1 70%;
+    flex: 1 1 30%;
 }
 
 .caja p.precios {
-    flex: 1 1 30%;
+    flex: 1 1 70%;
 }
 
 .descripciones {
@@ -455,6 +455,135 @@ input#nombreUsuario {
     background-color: white;
 }
 
+/*-----ProductDetail-------*/
+
+main.mainProductDetail {
+    margin-top: 165px;
+}
+section.ultima-visita{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.articulo{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 700px;
+    width: 100%;
+}
+
+div.nombres{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    align-items: center;
+}
+
+section.ultima-visita h2 {
+    margin-top: 10px;
+}
+
+section.ultima-visita h3 {
+    margin-top: 10px;
+}
+
+section.ultima-visita p{
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 10px;
+    color: #39b54a;
+}
+
+section.ultima-visita img{
+    margin-top: 10px;
+    max-width: 500px;
+    width: 100%;
+    border: lightgray 2px solid;
+}
+
+section.ultima-visita a{
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #0044AA;
+    padding: 8px; 
+    background-color: #0044AA;
+    max-width: 500px;
+}
+
+section.ultima-visita button{
+    width: 100%;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #a11717;
+    padding: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #a11717;
+    max-width: 500px;
+}
+
+/*-----edit-----*/
+
+div.field button{
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid #0044AA;
+    padding: 8px; 
+    background-color: #0044AA;
+    max-width: 500px;
+}
+
+section.ultima-visita{
+    margin: 10px;
+}
+
+section.ultima-visita .control1 input, .control2 input, .control3 input{
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    padding: 5px;
+}
+
+section.ultima-visita input{
+    margin-bottom: 10px;
+    margin-top: 3px;
+}
+
+/*------Create------*/
+
+main.mainCreate{
+    margin: 10px;
+}
+
+main.mainCreate .control1 input, .control2 input, .control3 input{
+    width: 100%;
+    border-radius: 7px;
+    border: 5px solid white;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    padding: 5px;
+}
+
+main.mainCreate input{
+    margin-bottom: 10px;
+    margin-top: 3px;
+}
+
 @media(min-width: 361px){
     article#separacion:hover{
         box-shadow : 0px 0px 10px rgb(100, 100, 100 );
@@ -511,6 +640,11 @@ input#nombreUsuario {
     form.buscador{
         width: 60%;
     }
+    /*-----ProductDetail-------*/
+
+main.mainProductDetail {
+    margin-top: 135px;
+}
 }  
 
 
@@ -574,6 +708,31 @@ input#nombreUsuario {
     main.create, .edit, .not-found, .productDetail, .products {
         margin-top: 123px;
     }
+
+    /*-----productDetail----*/ 
+
+    section.ultima-visita {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+    }
+    div.articulo{
+        margin-left: 10px;
+    }
+
+/*------edit------*/
+
+main.mainEdit{
+    margin-top: 144px;
+}
+
+/*----Create-----*/
+
+main.mainCreate{
+    margin-top: 144px;
+}
+    
 }
 
 
@@ -608,3 +767,4 @@ div.contenedor3, div.contenedor4, div.contenedor6 {
 div.contenedor7 button {
     max-width: 700px;
 }
+
