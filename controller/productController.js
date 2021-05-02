@@ -1,5 +1,8 @@
-let visitados = require('../data/datosProductos')
+// ESTO SERIA EL GESTOR DEL MODELO
+const jsonDB = require('../model/jsonDatabase');
 
+// Maneja todos los métodos para PRODUCTO, que lo pasa como parámetro
+const productModel = jsonDB('products');
 
 let productController = {
 
@@ -14,20 +17,17 @@ let productController = {
     show: (req, res) => {
         console.log('me hicieron click :' + req.params.id)
 
-        //        let product = visitados.find((value)=>value.id===req.params.id)
-
-        let product = visitados.find(function (value) {
-            console.log('me encontraron:' + value.id)
-            return value.id === req.params.id
-        })
-
-        console.log(product)
-        if (product) {
-            res.render('productDetail', { product });
-        } else {
-            res.render('not-found');
-        }
-    },
+      // Le delego al modelo la responsabilidad
+     // que la busque por ID del registro seleccionado 
+     // es por ello que atrapo em parámetro id  
+     const product = productModel.find(req.params.id);
+     console.log(product)
+     if (product) {
+         res.render('productDetail', { product });
+     } else {
+         res.render('not-found');
+     }
+ },
 
 // Función que muestra el formulario de crear Productos
     create: (req, res) => {
@@ -35,120 +35,111 @@ let productController = {
         res.render('create');
     },
 // Función que simula el almacenamiento, en este caso en array
-    store: (req, res) => {
-        console.log('entre al store')
-        console.log(req.body)
-        let producto =
-        {
-            id: "11",
-            name: req.body.name,
-            descuento: req.body.descuento,
-            price: req.body.price,
-            image: "images/img-cafetera-moulinex.jpg"
+store: (req, res) => {
+    console.log('Entre a store')
+    console.log(req.files);
 
-        }
- //------MUESTRO EL PRODUCTO A AGREGAR EN EL ARRAY       
-// Se agrega el registro al array
-        visitados.push(producto)
-      
-        res.redirect('/')
-    },
+ // Atrapo los contenido del formulario
+    const product = req.body;
+
+    console.log(' soy la nueva: ' +req.body.image)
+            console.log('soy la vieja '+ req.body.oldImage)
+            product.id = req.params.id;
+
+     // Verificar si viene un archivo, para nombrarlo  
+     product.image = req.file ? req.file.filename : req.body.oldImagen;
+  
+     if (req.body.image===undefined) {
+        product.image = product.oldImage
+    }
+    
+      console.log('.......MOSTRA LA IMAGEN.......')
+    console.log(product.image)
+    console.log(product)
+   
+   
+  // Elimino de la estructura auxiliar, porque no existe en Json 
+    delete product.oldImage;
+
+
+// Delego la responsabilidad al modelo para crear producto  
+   console.log(product)
+// Cuidade sólo mando el cuerpo del FORM, el Id me lo asigna el Modelo  
+productModel.create(product);
+
+    res.redirect('/')
+},
 
 // FUnción que muestra el formulario de edición
-    edit: (req, res) => {
-        console.log('ESTOY ENTRANDO AL METODO EDIT:')
-
-        let product = visitados.find(function (value) {
-
-            return value.id === req.params.id
-        })
-
-        console.log(product)
-        if (product) {
-            res.render('edit', { product });
-        } else {
-            res.render('not-found');
-        }
-    },
+edit: (req, res) => {
+    // Delego al modelo que busque el producto     
+         let product = productModel.find(req.params.id);
+ 
+         console.log(product)
+         if (product) {
+             res.render('edit', { product });
+         } else {
+             res.render('not-found');
+         }
+     },
 
 // Función que realiza cambios en el producto seleccionado
-    update: (req, res) => {
-        console.log('Entré al Update')
-        console.log(req.body)
+update: (req, res) => {
+    console.log("Entré al update")
+    // Armo la estructura del registro auxiliar (product)
 
-        // Crep una estructura de datos de similares campos que producto del Array Visitados
-        // Para asignarle el valor o contenido de los camos que viajarn por el body
-        let producto = {
+    let  product = req.body;
+  
 
-           
-            id: req.params.id,
-            name: req.body.name,
-            descuento: req.body.descuento,
-            price: req.body.price,
-            image: req.body.image
+    console.log(' soy la nueva: ' +req.body.image)
+    console.log('soy la vieja '+ req.body.oldImage)
+    product.id = req.params.id;
 
-        }
-        console.log(producto)
-        console.log('---------------------------------------')
-        console.log('me seleccionaron en update :' + req.params.id)
+ 
+      product.image = req.file ? req.file.filename : req.body.oldImagen;
+    
+      if (req.body.image===undefined) {
+        product.image = product.oldImage
+    }
+    
+      console.log('.......MOSTRA LA IMAGEN.......')
+    console.log(product.image)
+    console.log(product)
+   
+   
+  // Elimino de la estructura auxiliar, porque no existe en Json 
+    delete product.oldImage;
 
-        // En este momento en la variable litaral tengo todos los campos
-        // actualizados, entonces recorro rodo el array orifinal
-        // Localizo el id que quiero mofificar y procedo a:
-        // REEMPLAZAR EL VALOR DE CADA PROPIEDAD-
-        // NOTA EL ID DEL ARRAY NO SE MODIFICA
 
+    // Delego la responsabilidad al modelo que actualice
+    productModel.update(product);
+      
 
-        visitados.forEach(function (i) {
-            if (i.id === req.params.id) {
-                i.name = producto.name
-                i.price = producto.price
-                i.descuento = producto.descuento
-            }
-
-        })
-        console.log(visitados)
-
-// Me voy a la página principal mostrando todos los productos
-// y la modificación en el producto en cuestión
-        res.redirect('/')
-    },
+    res.redirect('/')
+},
 
 // Función que elimina del Array visitados ek producto seleccionado
-    destroy: (req, res) => {
-        console.log('entre destroy')
-        console.log(req.params.id)
+destroy: (req, res) => {
+    console.log('entre destroy')
+    productModel.delete(req.params.id);
+
+// Ahora se mostrará todo porque los productos los varga de un archivo       
+    res.redirect('/')
+},
 
 
-// Recorremos el array visitados y generamos otro, excluyendo el registro
-// que deseamos elinimar
-        let menorArray = visitados.filter(function (value) {
+cart: (req, res) => {
+    res.render('products/cart');
+},
 
-            return value.id !== req.params.id
-        })
-        console.log('-------ARRAY NUEVO MENOR')
-        console.log(menorArray)
-//  Se copia el array que tiene todos menos el eliminado en el array visitados     
-        visitados = [...menorArray]
-        console.log('----------ARRAY VISITADOS')
-// Se observa que el eliminado no pertenece al array     
-        console.log(visitados)
- // Ahora se mostrará todo porque los productos los varga de un archivo       
-        res.redirect('/')
-    },
+search: (req, res) => {
 
-
-    cart: (req, res) => {
-        res.render('products/cart');
-    },
-
-    search: (req, res) => {
-
-        let dataABuscar = req.query
-        res.sed(dataABuscar)
-    }
+    let dataABuscar = req.query
+    res.send(dataABuscar)
+}
 
 }
 
 
 module.exports = productController
+

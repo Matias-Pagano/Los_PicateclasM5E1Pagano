@@ -1,0 +1,25 @@
+<article class="productDetail">
+    <div class="imgContainer">
+        <img src="/images/<%= selectedProduct.image %>" alt="" class="productImg">
+    </div>
+    <div class="detailsContainer">
+        <h1 class="productName"><%= selectedProduct.name %></h1>
+        <div class="priceBox">
+            <div class="priceText">
+                <p>Precio:</p>
+                <p class="productPrice"> $<%= selectedProduct.price %></p>
+            </div>
+            <div class="priceDiscount">
+                <p>-%</p>
+                <p class="productDiscount"><%= selectedProduct.discount %></p>
+            </div>
+        </div>
+        <p class="finalPrice">Precio final: $<%= productDiscount %></p>
+
+        <p class="productDescription"><%= selectedProduct.description %></p>
+            <form action="" class="buttons">
+                <button class="editButton">Modificar</button>
+                <button class="deleteButton">Borrar</button>
+            </form>
+    </div>
+</article>
