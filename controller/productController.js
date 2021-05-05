@@ -4,6 +4,8 @@ const jsonDB = require('../model/jsonDatabase');
 // Maneja todos los métodos para PRODUCTO, que lo pasa como parámetro
 const productModel = jsonDB('products');
 
+const { validationResult } = require('express-validator');
+
 let productController = {
 
     home: (req, res) => {
@@ -38,6 +40,14 @@ let productController = {
 store: (req, res) => {
     console.log('Entre a store')
     console.log(req.files);
+
+    const resultValidation = validationResult(req);
+        if(resultValidation.errors.length > 0){
+         return res.render('create', {
+             errors: resultValidation.mapped(),
+             oldData: req.body //Esto es para que no se vaya borrando lo que uno escribe
+         });
+     }
 
  // Atrapo los contenido del formulario
     const product = req.body;

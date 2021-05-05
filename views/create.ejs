@@ -16,6 +16,9 @@
                                 <label for="name">Nombre</label>
                                 <div class="control1">
                                     <input type="text" name="name">
+                                    <% if(locals.errors && errors.name){ %>
+                                        <div><%= errors.name.msg %></div>
+                                    <% } %>
                                 </div>
                              
                             </div>
@@ -31,6 +34,9 @@
                                 <label for="price">Precio</label>
                                 <div class="control2">
                                     <input type="text" name="price">
+                                    <% if(locals.errors && errors.price){ %>
+                                        <div><%= errors.price.msg %></div>
+                                    <% } %>
                                 </div>
                             </div>
 
@@ -39,6 +45,9 @@
                                 <div class="control3">
                                    
                                     <input type="text" name="descuento">
+                                    <% if(locals.errors && errors.descuento){ %>
+                                        <div><%= errors.descuento.msg %></div>
+                                    <% } %>
                                 </div>
                             </div>
 

@@ -12,8 +12,14 @@
             <div class="contenedor1">
                 <label for="nombre"></label>
                 <input type="text" placeholder="Nombre de usuario" name="nombreUsuario" id="nombreUsuario">
+                <% if(locals.errors && errors.nombreUsuario){ %>
+                    <div><%= errors.nombreUsuario.msg %></div>
+                <% } %>
                 <label for="contraseña"></label>
                 <input type="password" placeholder="Contraseña" name="password" id="password">
+                <% if(locals.errors && errors.password){ %>
+                    <div><%= errors.password.msg %></div>
+                <% } %>
                 <div class="contenedor7">
                     <label for="submit" method="GET"></label>
                     <button type="submit">Enviar</button>
