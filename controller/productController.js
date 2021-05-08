@@ -52,7 +52,7 @@ store: (req, res) => {
  // Atrapo los contenido del formulario
     const product = req.body;
 
-    console.log(' soy la nueva: ' +req.body.image)
+    console.log(' soy la nueva: ' + req.body.image)
             console.log('soy la vieja '+ req.body.oldImage)
             product.id = req.params.id;
 

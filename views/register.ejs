@@ -1,96 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <%- include('partials/head') %>
+<%- include('partials/head') %>
 
-<body>
-    
-    <%- include('partials/header') %>
+    <body>
 
-    <main class="main-register">
-        <section class="section-register">
-            <form action="/" method="GET">
-                <div class="contenedor1">
-                    <label for="nombre"></label>
-                    <input required type="text" placeholder="Nombre y apellido" name="nombre" id="nombre">
-                    <label for="usuario"></label>
-                    <input required type="text" placeholder="Usuario" name="usuario" id="usuario">
-                    <label for="email"></label>
-                    <input required type="email" placeholder="E-mail" name="email" id="e-mail">
-                </div>
-                <br>
-                <h3>Fecha de nacimiento</h2>
-                    <br>
-                    <div class="contenedor2">
-                        <input required type="date" name="fecha" value="yyyy-MM-dd" id="calendario">
-                        <br>
-                        <label for="domicilio"></label>
-                        <input required type="domicilio" placeholder="Domicilio" name="domicilio" id="domicilio">
-                    </div>
+        <%- include('partials/header') %>
 
-                    <h3>Perfil del usuario</h2>
-                        <div class="contenedor3">
-                            <div>
-                            <input type="radio" name="Perfil del usuario" value="Comprador">Comprador
-                            </div>
-                            <div>
-                            <input type="radio" name="Perfil del usuario" value="Vendedor">Vendedor
-                            </div>
+            <main class="main-register">
+                <section class="section-register">
+                    <form action="/register" method="POST">
+                        <div class="contenedor1">
+                            <label for="nombre"></label>
+                            <input type="text" placeholder="Nombre y apellido" name="nombre" id="nombre">
+                            <% if(locals.errors && errors.nombre){ %>
+                                <div>
+                                    <%= errors.nombre.msg %>
+                                </div>
+                                <% } %>
+                                    <label for="usuario"></label>
+                                    <input type="text" placeholder="Usuario" name="usuario" id="usuario">
+                                    <% if(locals.errors && errors.usuario){ %>
+                                        <div>
+                                            <%= errors.usuario.msg %>
+                                        </div>
+                                        <% } %>
+                                            <label for="email"></label>
+                                            <input type="email" placeholder="E-mail" name="email" id="e-mail">
+                                            <% if(locals.errors && errors.email){ %>
+                                                <div>
+                                                    <%= errors.email.msg %>
+                                                </div>
+                                                <% } %>
                         </div>
-
-                        <h3>Categorías de Interes</h2>
-                            <div class="contenedor4">
-                                <div>
-                                <input type="checkbox" name="Categorías de Interes" value="Electro" id="check">Electro
-                                </div>
-                                <div>
-                                <input type="checkbox" name="Categorías de Interes" value="Moda" id="check">Moda
-                                </div>
-                                <div>
-                                <input type="checkbox" name="Categorías de Interes" value="Hogar" id="check">Hogar
-                                </div>
-                                <div> 
-                                <input type="checkbox" name="Categorías de Interes" value="Juguetería" id="check">Juguetería
-                                </div>
-                                <div>
-                                <input type="checkbox" name="Categorías de Interes" value="Vida sana" id="check">Vida sana
-                                </div>
-                            </div>
-                            <h3>Elegir tu foto de usuario</h3>
-                            <div class="contenedor5">
-                                <input required type="file" name="avatar" accept=".jpg, .png, .svg">
-                            </div>
-                            <div class="contenedor6">
-                                <div class="elegirContraseña">
-                                    <label for="password"></label>
-                                    <input required type="password" placeholder="Elegí tu contraseña" name="password"
-                                        id="password">
-                                </div>
-                                <div class="confirmarContraseña">
-                                    <label for="password"></label>
-                                    <input required type="password" placeholder="Confirmá tu contraseña" name="password"
-                                        id="password">
-                                </div>
-                            </div>
-                            <div class="botones">
-                                <form action="/" method="GET"> 
-                                <div class="contenedor7">
-                                    <label for="submit" method="GET"></label>
-                                    <button type="submit">Enviar</button>
-                                </div>
-                            </form>
-                                <div class="contenedor8">
-                                    <label for="reset" method="GET"></label>
-                                    <button type="reset">Borrar</button>
-                                </div>
+                        <br>
+                        <h3>Fecha de nacimiento</h2>
+                            <br>
+                            <div class="contenedor2">
+                                <input type="date" name="fecha" value="yyyy-MM-dd" id="calendario">
+                                <br>
+                                <label for="domicilio"></label>
+                                <input type="domicilio" placeholder="Domicilio" name="domicilio" id="domicilio">
+                                <% if(locals.errors && errors.domicilio){ %>
+                                    <div>
+                                        <%= errors.domicilio.msg %>
+                                    </div>
+                                    <% } %>
                             </div>
 
-            </form>
-        </section>
-    </main>
-    
-    <%- include('partials/footer') %>
+                            <h3>Perfil del usuario</h2>
+                                <div class="contenedor3">
+                                    <div>
+                                        <input type="radio" name="perfilUsuario" value="Comprador">Comprador
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="perfilUsuario" value="Vendedor">Vendedor
+                                        <% if(locals.errors && errors.perfilUsuario){ %>
+                                            <div>
+                                                <%= errors.perfilUsuario.msg %>
+                                            </div>
+                                            <% } %>
+                                    </div>
+                                </div>
 
-</body>
+                                <h3>Categorías de Interes</h2>
+                                    <div class="contenedor4">
+                                        <div>
+                                            <input type="checkbox" name="Categorías de Interes" value="Electro"
+                                                id="check">Electro
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="Categorías de Interes" value="Moda"
+                                                id="check">Moda
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="Categorías de Interes" value="Hogar"
+                                                id="check">Hogar
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="Categorías de Interes" value="Juguetería"
+                                                id="check">Juguetería
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="Categorías de Interes" value="Vida sana"
+                                                id="check">Vida sana
+                                        </div>
+                                    </div>
+                                    <h3>Elegir tu foto de usuario</h3>
+                                    <div class="contenedor5">
+                                        <input type="file" name="avatar" accept=".jpg, .png, .svg">
+                                    </div>
+                                    <div class="contenedor6">
+                                        <div class="elegirContraseña">
+                                            <label for="password"></label>
+                                            <input type="password" placeholder="Elegí tu contraseña" name="password"
+                                                id="password">
+                                            <% if(locals.errors && errors.password){ %>
+                                                <div>
+                                                    <%= errors.password.msg %>
+                                                </div>
+                                                <% } %>
+                                        </div>
+                                        <div class="confirmarContraseña">
+                                            <label for="password"></label>
+                                            <input type="password" placeholder="Confirmá tu contraseña"
+                                                name="confirmPassword" id="password">
+                                            <% if(locals.errors && errors.confirmPassword){ %>
+                                                <div>
+                                                    <%= errors.confirmPassword.msg %>
+                                                </div>
+                                                <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="botones">
+                                        <div class="contenedor7">
+                                            <label for="submit" method="POST"></label>
+                                            <button type="submit">Enviar</button>
+                                        </div>
+                                        <div class="contenedor8">
+                                            <label for="reset" method="GET"></label>
+                                            <button type="reset">Borrar</button>
+                                        </div>
+                                    </div>
+
+                    </form>
+                </section>
+            </main>
+
+            <%- include('partials/footer') %>
+
+    </body>
 
 </html>
