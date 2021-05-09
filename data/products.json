@@ -26,5 +26,12 @@
   "descuento": 10,
   "price": 23000,
   "image": "img-tv-samsung-smart.jpg"
+ },
+ {
+  "name": "Pedator",
+  "price": "9990000",
+  "descuento": "10",
+  "id": 5,
+  "image": "img-1620565601657.jpg"
  }
 ]

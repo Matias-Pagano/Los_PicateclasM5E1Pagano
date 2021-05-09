@@ -22,7 +22,7 @@ const validacionesUser = [
     body('perfilUsuario').notEmpty().withMessage('Debes completar este campo'),
     body('password').notEmpty().withMessage('Debes completar con una contraseña válida').bail().isLength({min: 10}).withMessage('La contraseña debe tener al menos 10 caracteres'),
     body('confirmPassword').notEmpty().withMessage('Debes completar con una contraseña válida').bail().isLength({min: 10}).withMessage('La contraseña debe tener al menos 10 caracteres'),
-    body('image').custom((value, { req }) => {
+    body('avatar').custom((value, { req }) => {
         let file = req.file;
         let acceptedExtensions = ['.jpg', '.gif', '.png'];
         if (!file) {
@@ -44,11 +44,31 @@ const upload = multer({ storage: storage });
 //implementacion sobre el router
 router.get('/Register', userController.register);
 
-router.post('/Register', upload.single('image'), validacionesUser, userController.storeUser);
+router.post('/Register', upload.single('avatar'), validacionesUser, userController.storeUser);
 
 router.get('/Login', userController.login);
 
-router.post('/Login', validacionesUser, userController.userLogin);
+// router.post('/Login', validacionesUser, userController.userLogin);
+
+router.get('/adminUser', userController.adminUser);
+
+// Detalle de un producto particular (GET)
+router.get('/adminUser/:id', userController.showUser);
+
+// El get de la Barra de Búsqueda
+router.get('/searchUser', userController.searchUser)
+
+// Formulario de edición de productos (GET)
+router.get('/:id/edit', userController.editUser);
+
+// Acción de creación (a donde se envía el formulario) (POST)
+router.post('/store', upload.single('image'), validacionesUser, userController.storeUser);
+
+// Acción de edición (a donde se envía el formulario) (PUT)
+router.put('/:id', upload.single('image'), userController.updateUser);
+
+// Acción de borrado (DELETE)
+router.delete('/:id', userController.destroyUser);
 
  //hacemos visible al router
  module.exports = router;
