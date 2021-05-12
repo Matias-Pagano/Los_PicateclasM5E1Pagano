@@ -22,15 +22,25 @@
                 <li><a href="/user/adminUser">Administrador de usuarios</a></li>
             </ul>
             
-            <ul class="nav-b">
-                <li><a href="/user/Register">Creá tu cuenta
-                        <!--iconito de registro-->
-                        <i class="far fa-id-card"></i>
-                    </a></li>
-                <li><a href="/user/Login">Ingresá
-                        <!--iconito de ingreso-->
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a></li>
+            <ul>
+                <% if(locals.isLogged){  %> 
+
+                <li><a href="/user/adminUser">
+
+                    <img src="/images/avatars/<%= locals.userLogged.avatar %> " alt="imagen de perfil" width="40" style="border-radius: 100%;">
+                    
+                    Hola! <%= locals.userLogged.name %>
+                </a></li>
+                <li><a href="/user/logout">Logout</a></li>
+
+
+                <% }else{ %>                             
+
+                
+
+              <li><a href="/user/register">Creá tu cuenta <i class="far fa-id-card"></i></a></li>
+              <li><a href="/user/login">Ingresá <i class="fas fa-sign-in-alt"></i></a></li>
+            <% } %> 
             </ul>
         </nav>
     </section>

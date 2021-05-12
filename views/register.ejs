@@ -12,21 +12,21 @@
                     <form action="/user/register" method="POST" enctype="multipart/form-data">
                         <div class="contenedor1">
                             <label for="nombre"></label>
-                            <input type="text" placeholder="Nombre y apellido" name="nombre" id="nombre">
+                            <input type="text" placeholder="Nombre y apellido" name="nombre" id="nombre" value="<%= locals.oldData ? oldData.nombre : null %>">
                             <% if(locals.errors && errors.nombre){ %>
                                 <div>
                                     <%= errors.nombre.msg %>
                                 </div>
                                 <% } %>
                                     <label for="usuario"></label>
-                                    <input type="text" placeholder="Usuario" name="usuario" id="usuario">
+                                    <input type="text" placeholder="Usuario" name="usuario" id="usuario" value="<%= locals.oldData ? oldData.usuario : null %>">
                                     <% if(locals.errors && errors.usuario){ %>
                                         <div>
                                             <%= errors.usuario.msg %>
                                         </div>
                                         <% } %>
                                             <label for="email"></label>
-                                            <input type="email" placeholder="E-mail" name="email" id="e-mail">
+                                            <input type="email" placeholder="E-mail" name="email" id="e-mail" value="<%= locals.oldData ? oldData.email : null %>">
                                             <% if(locals.errors && errors.email){ %>
                                                 <div>
                                                     <%= errors.email.msg %>
@@ -37,10 +37,10 @@
                         <h3>Fecha de nacimiento</h2>
                             <br>
                             <div class="contenedor2">
-                                <input type="date" name="fecha" value="yyyy-MM-dd" id="calendario">
+                                <input type="date" name="fecha" value="yyyy-MM-dd" id="calendario" value="<%= locals.oldData ? oldData.fecha : null %>">
                                 <br>
                                 <label for="domicilio"></label>
-                                <input type="domicilio" placeholder="Domicilio" name="domicilio" id="domicilio">
+                                <input type="domicilio" placeholder="Domicilio" name="domicilio" id="domicilio" value="<%= locals.oldData ? oldData.domicilio : null %>">
                                 <% if(locals.errors && errors.domicilio){ %>
                                     <div>
                                         <%= errors.domicilio.msg %>

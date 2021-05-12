@@ -40,7 +40,7 @@ const controller = {
 
         let userCreated = User.create(userToCreate);
 
-        return res.redirect('/users/login');
+        return res.redirect('/users/adminUser');
     },
     login: (req, res) => {
         return res.render('login');
