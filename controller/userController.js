@@ -19,13 +19,13 @@ const controller = {
             });
         }
 
-        let userInDB = User.findByField('email', req.body.email);
+        let userInDB = User.findByField('usuario', req.body.usuario);
 
         if (userInDB) {
             return res.render('register', {
                 errors: {
                     email: {
-                        msg: 'Este email ya está registrado'
+                        msg: 'Este usuario ya está registrado'
                     }
                 },
                 oldData: req.body
@@ -38,19 +38,15 @@ const controller = {
             avatar: req.file.filename
         }
 
-        const users = req.body;
-
-        console.log(users.avatar)
-
         let userCreated = User.create(userToCreate);
 
-        return res.redirect('adminUser');
+        return res.redirect('/users/login');
     },
     login: (req, res) => {
         return res.render('login');
     },
     loginProcess: (req, res) => {
-        let userToLogin = User.findByField('email', req.body.email);
+        let userToLogin = User.findByField('usuario', req.body.usuario);
 
         if (userToLogin) {
             let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.password);
@@ -59,14 +55,14 @@ const controller = {
                 req.session.userLogged = userToLogin;
 
                 if (req.body.remember_user) {
-                    res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
+                    res.cookie('usuario', req.body.usuario, { maxAge: (1000 * 60) * 60 })
                 }
 
-                return res.redirect('/adminUser');
+                return res.redirect('/user/adminUser');
             }
             return res.render('login', {
                 errors: {
-                    email: {
+                    usuario: {
                         msg: 'Las credenciales son inválidas'
                     }
                 }
@@ -75,24 +71,21 @@ const controller = {
 
         return res.render('login', {
             errors: {
-                email: {
-                    msg: 'No se encuentra este email en nuestra base de datos'
+                usuario: {
+                    msg: 'No se encuentra este usuario en nuestra base de datos'
                 }
             }
         });
     },
     profile: (req, res) => {
-        const users = User.findByField('email', req.body.email);
+        res.render('adminUser', {
+            user: req.session.userLogged
+        });
 
-        if (users) {
-            return res.render('adminUser', {
-                user: req.session.userLogged
-            });
-        }
     },
 
     logout: (req, res) => {
-        res.clearCookie('userEmail');
+        res.clearCookie('usuario');
         req.session.destroy();
         return res.redirect('/');
     }

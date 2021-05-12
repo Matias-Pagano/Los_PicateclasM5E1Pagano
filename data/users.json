@@ -1,93 +1,49 @@
 [
  {
   "id": 1,
-  "fullName": "Javi Herrera",
-  "email": "javi@dh.com",
-  "password": "$2a$10$kbHNepDXku1qKDytFK3RpuLtkW/dqMGDi4jXL7lNQUF8lm1HZ2.N.",
-  "country": "Colombia",
-  "avatar": "1609285636788_img.jpg"
+  "nombre": "Jack El Destripador",
+  "usuario": "Jackie",
+  "email": "jackie1787@gmail.com",
+  "fecha": "2021-05-07",
+  "domicilio": "Uspallata 205",
+  "perfilUsuario": "Comprador",
+  "CategoríasDeInteres": [
+   "Electro",
+   "Moda",
+   "Vida sana"
+  ],
+  "password": "$2a$10$42u5c9pEHYHrn.jrYfFGiu4v54uwT7mjJcwjNi/poiu8IkFX7yXfK",
+  "confirmPassword": "1234567890",
+  "avatar": "1620858502749_img.jpg"
  },
  {
   "id": 2,
-  "nombre": "Matias Pagano",
-  "usuario": "MP5",
-  "email": "matiaspagano@gmail.com",
-  "fecha": "2021-06-04",
+  "nombre": "Jack El Destripador",
+  "usuario": "Jackie",
+  "email": "jackie17832@gmail.com",
+  "fecha": "2021-05-07",
   "domicilio": "Uspallata 205",
   "perfilUsuario": "Comprador",
-  "CategoríasDeInteres": "Hogar",
-  "password": "$2a$10$.0wGsqp0.s6Vy5fi2yiQQ.VhWGH4nV//MeBmv4XmqGHm8iPrCUevW",
+  "CategoríasDeInteres": [
+   "Electro",
+   "Moda",
+   "Vida sana"
+  ],
+  "password": "$2a$10$tB/OGNQILOyggHrRoGbtkeMcyEDqvlocj/jpWaYAP.tB7I7e6p.7K",
   "confirmPassword": "1234567890",
-  "avatar": "1620855872323_img.jpg"
+  "avatar": "1620858679002_img.jpg"
  },
  {
   "id": 3,
   "nombre": "Jack El Destripador",
   "usuario": "Jackie",
-  "email": "jack@gmail.com",
-  "fecha": "2021-05-07",
-  "domicilio": "sdfsdf",
-  "perfilUsuario": "Comprador",
-  "CategoríasDeInteres": "Electro",
-  "password": "$2a$10$0xeyZqbgxU92mbEi1OR0/eA5RWq2wcCC.fb6HPLVIU85a7ex9DynO",
-  "confirmPassword": "1234567890",
-  "avatar": "1620857615685_img.png"
- },
- {
-  "id": 4,
-  "nombre": "Jack El Destripador",
-  "usuario": "Jackie",
   "email": "jackie@gmail.com",
   "fecha": "2021-05-07",
-  "domicilio": "sdfsdf",
+  "domicilio": "Uspallata 205",
   "perfilUsuario": "Comprador",
-  "CategoríasDeInteres": [
-   "Electro",
-   "Moda",
-   "Hogar",
-   "Juguetería",
-   "Vida sana"
-  ],
-  "password": "$2a$10$PVhVzpmfp2pjJckVy6X/OuCI0xERyMKap4vqae9MJXjZQH2MGHCle",
+  "CategoríasDeInteres": "Electro",
+  "password": "$2a$10$6XoPsH3hAMVZplxdNwa72.LKKVNWzvsQznVB9J/PkosJGN2yRtYyq",
   "confirmPassword": "1234567890",
-  "avatar": "1620857768403_img.png"
- },
- {
-  "id": 5,
-  "nombre": "Jack El Destripador",
-  "usuario": "Jackie",
-  "email": "jackie1789@gmail.com",
-  "fecha": "2021-05-07",
-  "domicilio": "sdfsdf",
-  "perfilUsuario": "Comprador",
-  "CategoríasDeInteres": [
-   "Electro",
-   "Moda",
-   "Hogar",
-   "Juguetería",
-   "Vida sana"
-  ],
-  "password": "$2a$10$3siv8Qru7CFxAT/TM6P0Be2yYADkNWlHO27SsM3tattGj07x2HQHa",
-  "confirmPassword": "1234567890",
-  "avatar": "1620857856000_img.png"
- },
- {
-  "id": 6,
-  "nombre": "Jack El Destripador",
-  "usuario": "Jackie",
-  "email": "jackie1787@gmail.com",
-  "fecha": "2021-05-07",
-  "domicilio": "sdfsdf",
-  "perfilUsuario": "Comprador",
-  "CategoríasDeInteres": [
-   "Electro",
-   "Moda",
-   "Hogar",
-   "Juguetería",
-   "Vida sana"
-  ],
-  "password": "$2a$10$y1nTeFPcuHOLwv1peVdYKOTLHN0y6VJHwlef9oRzsvovqEb04dnti",
-  "confirmPassword": "1234567890",
-  "avatar": "1620858096151_img.png"
+  "avatar": "1620859177186_img.jpg"
  }
 ]

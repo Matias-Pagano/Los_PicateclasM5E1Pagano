@@ -38,8 +38,7 @@ app.use(userLoggedMiddleware);
 app.use('/', homeRoutes);
 app.use('/', userRoutes); 
 app.use('/', loginRoutes); 
-app.use('/', userRoutes); 
-
+app.use('/user', userRoutes); 
 app.use('/products', productRoutes);
 
 app.use((req, res, next) => {

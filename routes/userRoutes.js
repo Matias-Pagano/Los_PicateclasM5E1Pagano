@@ -41,7 +41,7 @@ router.post('/login', userController.loginProcess);
 router.get('/adminUser', authMiddleware, userController.profile);
 
 // Logout
-router.get('/logout/', userController.logout);
+router.get('/logout', userController.logout);
 
  //hacemos visible al router
  module.exports = router;
