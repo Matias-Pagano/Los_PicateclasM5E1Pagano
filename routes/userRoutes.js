@@ -14,61 +14,34 @@ const storage = multer.diskStorage({
     }
 });
 
-const validacionesUser = [
-    body('nombre').notEmpty().withMessage('Debes completar con un nombre válido'),
-    body('usuario').notEmpty().withMessage('Debes completar con un nombre válido'),
-    body('email').notEmpty().withMessage('Debes completar con un número').bail().isEmail().withMessage('Debes ingresar un Email válido'),
-    body('domicilio').notEmpty().withMessage('Debes completar con un domicilio válido'),
-    body('perfilUsuario').notEmpty().withMessage('Debes completar este campo'),
-    body('password').notEmpty().withMessage('Debes completar con una contraseña válida').bail().isLength({min: 10}).withMessage('La contraseña debe tener al menos 10 caracteres'),
-    body('confirmPassword').notEmpty().withMessage('Debes completar con una contraseña válida').bail().isLength({min: 10}).withMessage('La contraseña debe tener al menos 10 caracteres'),
-    body('avatar').custom((value, { req }) => {
-        let file = req.file;
-        let acceptedExtensions = ['.jpg', '.gif', '.png'];
-        if (!file) {
-            throw new Error('Debes cargar una imagen válida')
-        } else {
-            let fileExtension = path.extname(file.originalname);
-            if (!acceptedExtensions.includes(fileExtension)) {
-                throw new Error(`Las extensiones de archivo permitidas son  ${acceptedExtensions.join(', ')}`);
-
-            }
-
-        }
-        return true;
-    })
-]
 
 const upload = multer({ storage: storage });
 
+// Middlewares
+const uploadFile = require('../middlewares/multerMiddleware');
+const validations = require('../middlewares/validateRegisterMiddleware');
+const guestMiddleware = require('../middlewares/guestMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
+
 //implementacion sobre el router
-router.get('/Register', userController.register);
 
-router.post('/Register', upload.single('avatar'), validacionesUser, userController.storeUser);
+// Formulario de registro
+router.get('/register', guestMiddleware, userController.register);
 
-router.get('/Login', userController.login);
+// Procesar el registro
+router.post('/register', uploadFile.single('avatar'), validations, userController.processRegister);
 
-// router.post('/Login', validacionesUser, userController.userLogin);
+// Formulario de login
+router.get('/login', guestMiddleware, userController.login);
 
-router.get('/adminUser', userController.adminUser);
+// Procesar el login
+router.post('/login', userController.loginProcess);
 
-// Detalle de un producto particular (GET)
-router.get('/adminUser/:id', userController.showUser);
+// Perfil de Usuario
+router.get('/adminUser', authMiddleware, userController.profile);
 
-// El get de la Barra de Búsqueda
-router.get('/searchUser', userController.searchUser)
-
-// Formulario de edición de productos (GET)
-router.get('/:id/edit', userController.editUser);
-
-// Acción de creación (a donde se envía el formulario) (POST)
-router.post('/store', upload.single('image'), validacionesUser, userController.storeUser);
-
-// Acción de edición (a donde se envía el formulario) (PUT)
-router.put('/:id', upload.single('image'), userController.updateUser);
-
-// Acción de borrado (DELETE)
-router.delete('/:id', userController.destroyUser);
+// Logout
+router.get('/logout/', userController.logout);
 
  //hacemos visible al router
  module.exports = router;

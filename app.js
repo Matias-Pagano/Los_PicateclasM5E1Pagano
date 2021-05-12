@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT;
 const path = require('path');
+const session = require('express-session');
+const cookies = require('cookie-parser');
 //donde estan los gerentes de ruteo
 const homeRoutes = require('./routes/homeRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -20,10 +22,23 @@ app.use(express.json());
 //
 app.set('view engine', 'ejs');
 
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
+
+app.use(session({
+	secret: "Shhh, es un secreto",
+	resave: false,
+	saveUninitialized: false,
+}));
+
+app.use(cookies());
+
+app.use(userLoggedMiddleware);
+
 //llamo al ruteo
 app.use('/', homeRoutes);
 app.use('/', userRoutes); 
 app.use('/', loginRoutes); 
+app.use('/', userRoutes); 
 
 app.use('/products', productRoutes);
 
@@ -31,18 +46,6 @@ app.use((req, res, next) => {
     res.status(404).render('not-found');
     next();
 })
-
-/*app.get('/', (req, res) => {
-    res.render('home');
-});
-
-app.get('/Register', (req, res) => {
-    res.render('register');
-});
-
-app.get('/Login', (req, res) => {
-    res.render('login');
-});*/
 
 app.listen(port || 3000, () => {
     if (port == undefined) {

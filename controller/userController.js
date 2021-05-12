@@ -1,209 +1,101 @@
-const userDB = require('../model/User');
-const userModel = userDB('users');
-const { validationResult } = require('express-validator');
-let bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
+const {
+    validationResult
+} = require('express-validator');
 
-let userController = {
+const User = require('../model/User');
 
+const controller = {
     register: (req, res) => {
-        res.render('register')
+        return res.render('register');
+    },
+    processRegister: (req, res) => {
+        const resultValidation = validationResult(req);
+
+        if (resultValidation.errors.length > 0) {
+            return res.render('register', {
+                errors: resultValidation.mapped(),
+                oldData: req.body
+            });
+        }
+
+        let userInDB = User.findByField('email', req.body.email);
+
+        if (userInDB) {
+            return res.render('register', {
+                errors: {
+                    email: {
+                        msg: 'Este email ya está registrado'
+                    }
+                },
+                oldData: req.body
+            });
+        }
+
+        let userToCreate = {
+            ...req.body,
+            password: bcryptjs.hashSync(req.body.password, 10),
+            avatar: req.file.filename
+        }
+
+        const users = req.body;
+
+        console.log(users.avatar)
+
+        let userCreated = User.create(userToCreate);
+
+        return res.redirect('adminUser');
     },
     login: (req, res) => {
-        res.render('login')
+        return res.render('login');
+    },
+    loginProcess: (req, res) => {
+        let userToLogin = User.findByField('email', req.body.email);
+
+        if (userToLogin) {
+            let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.password);
+            if (isOkThePassword) {
+                delete userToLogin.password;
+                req.session.userLogged = userToLogin;
+
+                if (req.body.remember_user) {
+                    res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
+                }
+
+                return res.redirect('/adminUser');
+            }
+            return res.render('login', {
+                errors: {
+                    email: {
+                        msg: 'Las credenciales son inválidas'
+                    }
+                }
+            });
+        }
+
+        return res.render('login', {
+            errors: {
+                email: {
+                    msg: 'No se encuentra este email en nuestra base de datos'
+                }
+            }
+        });
+    },
+    profile: (req, res) => {
+        const users = User.findByField('email', req.body.email);
+
+        if (users) {
+            return res.render('adminUser', {
+                user: req.session.userLogged
+            });
+        }
     },
 
-    adminUser: (req, res) => {
-        console.log('entro al home del produt controller y redirijo')
-
-        res.render('adminUser')
-
-    },
-
-// Función que muestra el detalle del producto, cuando hacemos click en la foto
-    showUser: (req, res) => {
-        console.log('me hicieron click :' + req.params.id)
-
-      // Le delego al modelo la responsabilidad
-     // que la busque por ID del registro seleccionado 
-     // es por ello que atrapo em parámetro id  
-     const user = userModel.find(req.params.id);
-     console.log(user)
-     if (user) {
-         res.render('adminUser', { user });
-     } else {
-         res.render('not-found');
-     }
- },
-
-// Función que muestra el formulario de crear Productos
-    createUser: (req, res) => {
-        console.log('entre a register');
-        res.render('register');
-    },
-// Función que simula el almacenamiento, en este caso en array
-storeUser: (req, res) => {
-    console.log('Entre al registro')
-    console.log(req.files);
-
-    const resultValidation = validationResult(req);
-        if(resultValidation.errors.length > 0){
-         return res.render('register', {
-             errors: resultValidation.mapped(),
-             oldData: req.body //Esto es para que no se vaya borrando lo que uno escribe
-         });
-     }
-
- // Atrapo los contenido del formulario
-    const user = req.body;
-
-    console.log(' soy la nueva: ' + req.body.image)
-            console.log('soy la vieja '+ req.body.oldImage)
-            user.id = req.params.id;
-
-     // Verificar si viene un archivo, para nombrarlo  
-     user.image = req.file ? req.file.filename : req.body.oldImagen;
-  
-     if (req.body.image===undefined) {
-        user.image = user.oldImage
+    logout: (req, res) => {
+        res.clearCookie('userEmail');
+        req.session.destroy();
+        return res.redirect('/');
     }
-    
-      console.log('.......MOSTRA LA IMAGEN.......')
-    console.log(user.image)
-    console.log(user)
-   
-   
-  // Elimino de la estructura auxiliar, porque no existe en Json 
-    delete user.oldImage;
-
-
-// Delego la responsabilidad al modelo para crear producto  
-   console.log(user)
-// Cuidade sólo mando el cuerpo del FORM, el Id me lo asigna el Modelo  
-userModel.create(user);
-
-    res.redirect('/adminUser')
-},
-
-// FUnción que muestra el formulario de edición
-editUser: (req, res) => {
-    // Delego al modelo que busque el producto     
-         let user = userModel.find(req.params.id);
- 
-         console.log(user)
-         if (user) {
-             res.render('edit', { user });
-         } else {
-             res.render('not-found');
-         }
-     },
-
-// Función que realiza cambios en el producto seleccionado
-updateUser: (req, res) => {
-    console.log("Entré al update")
-    // Armo la estructura del registro auxiliar (product)
-
-    let  user = req.body;
-  
-
-    console.log(' soy la nueva: ' +req.body.image)
-    console.log('soy la vieja '+ req.body.oldImage)
-    user.id = req.params.id;
-
- 
-      user.image = req.file ? req.file.filename : req.body.oldImagen;
-    
-      if (req.body.image===undefined) {
-        user.image = user.oldImage
-    }
-    
-      console.log('.......MOSTRA LA IMAGEN.......')
-    console.log(user.image)
-    console.log(user)
-   
-   
-  // Elimino de la estructura auxiliar, porque no existe en Json 
-    delete user.oldImage;
-
-
-    // Delego la responsabilidad al modelo que actualice
-    userModel.update(user);
-      
-
-    res.redirect('/')
-},
-
-// Función que elimina del Array visitados ek producto seleccionado
-destroyUser: (req, res) => {
-    console.log('entre destroy')
-    userModel.delete(req.params.id);
-
-// Ahora se mostrará todo porque los productos los varga de un archivo       
-    res.redirect('/')
-},
-
-
-// cart: (req, res) => {
-//     res.render('products/cart');
-// },
-
-searchUser: (req, res) => {
-
-    let userABuscar = req.query
-    res.send(userABuscar)
 }
 
-}
-
-module.exports = userController;
-
-// const controlador = {
-//     admin: (req, res) => {
-
-//         let users = userModel.all();
-//         res.render('adminUser', {users});
-//     },
-//     register: (req, res) => {
-//         res.render('register')
-//     },
-//     storeUser: (req, res) => {
-//         const resultValidation = validationResult(req);
-//         if(resultValidation.errors.length > 0){
-//          return res.render('register', {
-//              errors: resultValidation.mapped(),
-//              oldData: req.body //Esto es para que no se vaya borrando lo que uno escribe
-//          });
-//      }
-//         // return res.send('Se ha registrado con éxito') //acá iria un res.redirect hacia la página del uduario
-
-//     // Atrapo los contenido del formulario
-//         let users = req.body;
-
-//         usersId = userModel.create(users);
-
-//         res.redirect('/aminUser/' + usersId);
-
-//          // Verificar si viene un archivo, para nombrarlo  
-//          users.image = req.file ? req.file.filename : '';
-      
-//         console.log(users.image)
-
-//     // Delego la responsabilidad al modelo para crear producto  
-//        console.log(users)
-//     // Cuidade sólo mando el cuerpo del FORM, el Id me lo asigna el Modelo  
-//     userModel.register(users);
-   
-//         res.redirect('/')
-//     },
-//     login: (req, res) => {
-//         res.render('login');
-//     },
-//     userLogin: (req, res) => {
-//         const resultValidation = validationResult(req);
-//         if(resultValidation.errors.length > 0){
-//          return res.render('login', {
-//              errors: resultValidation.mapped(),
-//              oldData: req.body //Esto es para que no se vaya borrando lo que uno escribe
-//          });
-//      }
-//     }}
-
+module.exports = controller;

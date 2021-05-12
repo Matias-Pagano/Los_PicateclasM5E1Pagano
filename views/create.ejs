@@ -15,7 +15,7 @@
                             <div class="field">
                                 <label for="name">Nombre</label>
                                 <div class="control1">
-                                    <input type="text" name="name">
+                                    <input type="text" name="name" value="<%= locals.old && old.name %>">
                                     <% if(locals.errors && errors.name){ %>
                                         <div><%= errors.name.msg %></div>
                                     <% } %>
@@ -26,14 +26,14 @@
                             <div class="field">
                                 <label for="image">Imagen</label>
                                 <div class="control">
-                                    <input type="file" name="image">
+                                    <input type="file" name="image" value="<%= locals.old && old.image %>">
                                 </div>
                             </div>
 
                             <div class="field">
                                 <label for="price">Precio</label>
                                 <div class="control2">
-                                    <input type="text" name="price">
+                                    <input type="text" name="price" value="<%= locals.old && old.price %>">
                                     <% if(locals.errors && errors.price){ %>
                                         <div><%= errors.price.msg %></div>
                                     <% } %>
@@ -44,7 +44,7 @@
                                 <label for="descuento">descuento</label>
                                 <div class="control3">
                                    
-                                    <input type="text" name="descuento">
+                                    <input type="text" name="descuento" value="<%= locals.old && old.descuento %>">
                                     <% if(locals.errors && errors.descuento){ %>
                                         <div><%= errors.descuento.msg %></div>
                                     <% } %>
