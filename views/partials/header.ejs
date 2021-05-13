@@ -19,7 +19,7 @@
             <ul class="nav-a">
                 <li><a href="/">Productos</a></li>
                 <li><a href="/products/create">Nuevo</a></li>
-                <li><a href="/user/adminUser">Administrador de usuarios</a></li>
+                <li><a href="#">Ayuda</a></li>
             </ul>
             
             <ul>
@@ -29,7 +29,7 @@
 
                     <img src="/images/avatars/<%= locals.userLogged.avatar %> " alt="imagen de perfil" width="40" style="border-radius: 100%;">
                     
-                    Hola! <%= locals.userLogged.name %>
+                    Hola <%= locals.userLogged.nombre %>!
                 </a></li>
                 <li><a href="/user/logout">Logout</a></li>
 

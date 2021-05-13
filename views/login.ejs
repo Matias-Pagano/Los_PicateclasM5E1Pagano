@@ -11,12 +11,12 @@
         <form action="/user/Login" method="POST">
             <div class="contenedor1">
                 <label for="nombre"></label>
-                <input type="text" placeholder="Nombre de usuario" name="usuario" id="usuario">
+                <input type="text" placeholder="Nombre de usuario" name="usuario" id="usuario" value="<%= locals.oldData ? oldData.usuario : null %>">
                 <% if(locals.errors && errors.usuario){ %>
                     <div><%= errors.usuario.msg %></div>
                 <% } %>
                 <label for="contraseña"></label>
-                <input type="password" placeholder="Contraseña" name="password" id="password">
+                <input type="password" placeholder="Contraseña" name="password" id="password" >
                 <% if(locals.errors && errors.password){ %>
                     <div><%= errors.password.msg %></div>
                 <% } %>
