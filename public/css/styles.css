@@ -588,6 +588,17 @@ main.mainCreate input{
     max-width: 500px;
     text-align: center;
     margin: auto;
+    border: grey 1px solid;
+}
+.row{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.loggedImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media(min-width: 361px){
@@ -713,6 +724,9 @@ main.mainProductDetail {
     }
     main.create, .edit, .not-found, .productDetail, .products {
         margin-top: 123px;
+    }
+    .containerLogged{
+        margin-top: 155px;
     }
 
     /*-----productDetail----*/ 
